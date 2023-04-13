@@ -5,4 +5,5 @@ node_modules/
 .env
 
 # Ignore config.js in each folder
+**/config.js
 **/hamicgamedata_key.json
