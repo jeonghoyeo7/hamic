@@ -1,0 +1,394 @@
+body {
+    font-family: Arial, sans-serif;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+btn, input {
+    vertical-align:middle;
+ }
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.footer-light {
+    background-color: #edf1f4c1; /* Adjust the color value to your preference */
+}
+.slim-footer {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+/* #rankingTable th:nth-child(4),
+#rankingTable td:nth-child(4),
+#rankingTable th:nth-child(7),
+#rankingTable td:nth-child(7),
+#rankingTable th:nth-child(2),
+#rankingTable td:nth-child(2),
+#rankingTable th:nth-child(5),
+#rankingTable td:nth-child(5) {
+    width: 120px;
+} */
+#statsTable {
+    display: none;
+}
+#statsTable {
+    width: 100%;
+    margin: 20px auto;
+}
+#statsTable td {
+    max-width: 150px;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#statsTable td:nth-child(1) {
+    max-width: 100px;
+}
+
+#statsTable2 {
+    display: none;
+}
+#statsTable2 {
+    width: 100%;
+    margin: 20px auto;
+}
+#statsTable2 td {
+    max-width: 150px;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#statsTable2 td:nth-child(1) {
+    max-width: 50px;
+}
+#left-stats-table,
+#right-stats-table {
+    width: 100%;
+}
+.stats-table {
+    font-size: 14px; /* Adjust font size here */
+    width: 100%;
+    border-collapse: collapse;
+}
+.stats-table th,
+.stats-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+.stats-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.stats-table tr:hover {
+    background-color: #ddd;
+    min-height: 30px; /* Adjust the minimum height here */
+}
+.stats-table th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #d09e60;
+    color: white;
+}
+.subtitle-stats {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #ac5745;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/* Responsive font size */
+@media screen and (max-width: 768px) {
+    .stats-table td,
+    .stats-table th {
+        font-size: 11px;
+    }
+    th {
+        white-space: normal !important;
+    }
+    .table-responsive {
+        margin-right: 2px;
+    }
+}
+
+/* Your current CSS */
+
+/* Add this media query */
+@media screen and (max-width: 768px) {
+    .game-data-table td,
+    .game-data-table th {
+        font-size: 11px;
+    }
+    th {
+        white-space: normal !important;
+    }
+    .game-data-table {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+.game-data-table {
+    font-size: 14px;
+}
+
+/* Responsive table */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+/* Add this to your CSS file or inside a <style> tag */
+@media screen and (max-width: 768px) {
+    th {
+        white-space: normal !important;
+    }
+}
+
+.custom-form-check {
+    width: 250px; /* Adjust this value to the desired width */
+}
+
+.custom-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#playerListTable {
+    font-size: 0.9em;
+    width: 100%;
+}
+
+#playerListTable th {
+    cursor: pointer;
+}
+
+#playerListTable td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#playerListTable .team-column {
+    width: 25%;
+}
+
+#playerListTable .tier-column {
+    width: 20%;
+}
+
+#playerListTable .id-column {
+    width: 30%;
+}
+
+#playerListTable .race-column {
+    width: 25%;
+}
+
+.player-list-table {
+    max-width: 800px; /* Adjust this value to your desired max-width */
+    margin: auto;
+}
+
+.chart-container {
+    position: relative;
+    height: 50vh;
+    width: 100%;
+}
+
+.visitor-stats {
+    font-size: 0.8rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.table-responsive {
+    flex: 1;
+    margin-right: 5px;
+}
+
+.table-responsive:last-child {
+    margin-right: 0;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    font-size: 14px;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+
+footer i {
+    margin-right: 5px;
+    color: #ff6347; /* You can choose any color you like */
+}
+
+.buymeacoffee-container {
+    height: 40px; /* Change the height as needed */
+}
+.buymeacoffee-container img {
+    height: 100%;
+    width: auto;
+}
+
+#team-ranking {
+    display: flex;
+    justify-content: center;
+  }
+
+#team-ranking-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 700px;
+}
+
+#team-ranking-table th,
+#team-ranking-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#team-ranking-table th {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 767px) {
+    #team-ranking-table td {
+        padding: 4px;
+        font-size: 12px;
+        width: 100%;
+        max-width: 767px;
+        margin: 0 auto;
+    }
+}
+
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+
+#schedule-table {
+    font-size: 11px;
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 1000px;
+    /* max-width: 100%; */
+    /* table-layout: fixed; */
+}
+
+
+
+#schedule-table th,
+#schedule-table td {
+    border: 1px solid #494949;
+    padding: 3px;
+    text-align: center;
+    width: auto;
+    word-break: break-all;
+    /* padding: 8px; */
+}
+
+#schedule-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    #schedule-table {
+        font-size: 10px;
+        /* width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        text-overflow: ellipsis; */
+    }
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 20px; /* Optional: add some bottom margin */
+}
+
+/* @media (max-width: 767px) {
+    #schedule-table td {
+      width: 33.33%;
+      max-width: 33.33%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* font-size: 10px;
+      padding: 3px;
+        text-align: center;
+        width: auto;
+        word-break: break-all; */
+    /* } */
+    /* th {
+        font-size: 11px;
+        white-space: normal !important;
+    }
+    #schedule {
+        max-width: 100%;
+    } */
+/* } */
+  
+#schedule-table .highlighted {
+    background-color: yellow;
+}
+
+.today-match {
+    text-align: center;
+    background-color: #e6e6ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.match-highlight {
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  /* Add any other highlighting styles you want */
+}
+.text-danger {
+  color: red;
+}
+#schedule-table .grey-background {
+    background-color: rgb(223, 220, 220);
+}
