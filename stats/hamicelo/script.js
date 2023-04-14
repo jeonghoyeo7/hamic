@@ -1,7 +1,7 @@
 import {
   firebaseConfig,
   googleConfig,
-} from './config.js';
+} from './config/config.js';
 
 let playerInfoGlobal = null;
 let gameResultsGlobal = null;
