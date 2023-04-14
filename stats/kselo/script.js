@@ -81,6 +81,7 @@ async function fetchPlayerData() {
         const winRate = games > 0 ? win / games : 0; // calculate the win rate, or set it to 0 if no games have been played
         return {
           Rank: Number(row[0]),
+          RankInTier: 0,
           Point: Number(row[1]),
           ID: row[3] ? row[3].replace('[kS]', '') : '',
           Tier: row[6],
@@ -102,6 +103,12 @@ async function fetchPlayerData() {
         pointStats[player.Point] = (pointStats[player.Point] || 0) + 1;
         tierStats[player.Tier] = (tierStats[player.Tier] || 0) + 1;
         raceStats[player.Race] = (raceStats[player.Race] || 0) + 1;
+    
+        const playersInTier = playerResults.filter(p => p.Tier === player.Tier);
+        playersInTier.sort((a, b) => b.Point - a.Point);
+        const rankInTier = playersInTier.findIndex(p => p.ID === player.ID) + 1;
+    
+        player.RankInTier = rankInTier;
     });
 
     // Prepare the data and labels for the charts
@@ -114,6 +121,7 @@ async function fetchPlayerData() {
 
     const pointLabels = Object.keys(pointStats).sort((a, b) => parseInt(a) - parseInt(b));
     const pointData = pointLabels.map(label => pointStats[label]);
+    
 
     // Calculate cumulative distribution
     const cumulativePointData = [];
@@ -126,6 +134,8 @@ async function fetchPlayerData() {
     // Normalize cumulative distribution to convert it to CDF
     const totalPlayers = playerResults.length;
     const normalizedCumulativePointData = cumulativePointData.map(value => value / totalPlayers);
+
+    
 
     // Destroy existing chart instances if they exist
     if (pointChartInstance) pointChartInstance.destroy();
@@ -232,6 +242,8 @@ function displayData(gameResults, tableName, itemsPerPage = 100, currentPage = 1
 
         tableBody.appendChild(row);
     });
+
+    let pageContainerName;
     pageContainerName = tableName + 'PageContainer';
     displayPaginationButtons(gameResults.length, pageContainerName, itemsPerPage, currentPage, (newPage) => {
         displayData(gameResults, tableName, itemsPerPage, newPage);
@@ -562,14 +574,14 @@ function displayStatistics(gameResults, tableName, keyword, compare) {
             <tr>
                 <td colspan="2">
                     <div id="player-info" class="container text-center">
-                        <h2 id="player-id">${playerThis[0].ID}</h2> 
-                        <h4 id="player-race">Rank-${playerThis[0].Rank} / ELO ${playerThis[0].Point} / ${playerThis[0].Tier} / ${playerThis[0].Race}</h3>
+                    <h2 id="player-id">${playerThis[0].ID}</h2>
+                        <h4 id="player-race">Rank-${playerThis[0].Rank} / ELO ${playerThis[0].Point} / ${playerThis[0].Tier}-${playerThis[0].RankInTier} ${playerThis[0].RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : ''} / ${playerThis[0].Race}</h3>
                     </div>                    
                     ${compare ? `
                     <div id="player-infovs" class="container text-center"> VS </div>
                     <div id="player-info2" class="container text-center grey-color">
-                        <h2 id="player-id2">${playerThat[0].ID}</h2>
-                        <h4 id="player-race2">Rank-${playerThat[0].Rank} / ${playerThat[0].Tier} / ${playerThat[0].Race}</h3>
+                    <h2 id="player-id">${playerThat[0].ID}</h2>
+                        <h4 id="player-race2">Rank-${playerThat[0].Rank} / ELO ${playerThat[0].Point} / ${playerThat[0].Tier}-${playerThat[0].RankInTier} ${playerThat[0].RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : ''} / ${playerThat[0].Race}</h3>
                     </div>
                     ` : ''}
                 </td>
@@ -824,6 +836,27 @@ function searchTwo() {
 
 document.getElementById('searchButton').addEventListener('click', search);
 document.getElementById('searchButton2').addEventListener('click', searchTwo);
+
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("searchButton").click();
+    }
+});
+
+document.getElementById("searchInput1").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("searchButton2").click();
+    }
+});
+
+document.getElementById("searchInput2").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("searchButton2").click();
+    }
+});
 
 
 // // Load all game results on page load
@@ -1210,3 +1243,5 @@ function displayPaginationButtons(totalItems, pageContainerName, itemsPerPage, c
     paginationContainer.appendChild(nextButton);
     paginationContainer.appendChild(lastButton);
 }
+
+export { fetchPlayerData, populatePlayerListTable };
