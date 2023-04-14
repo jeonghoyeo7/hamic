@@ -1,16 +1,16 @@
 import {
-  firebaseConfig,
-  googleConfig,
+  FirebaseConfig,
+  GoogleConfig,
 } from './config/config.js';
 
 let playerInfoGlobal = null;
 let gameResultsGlobal = null;
-const googleDriveFolderId = googleConfig.driveFolerId; 
+const googleDriveFolderId = GoogleConfig.driveFolerId; 
 
 let driveFiles = [];
 
 async function getDriveFiles(folderId) {
-    const apiKey = googleConfig.apiKey;
+    const apiKey = GoogleConfig.apiKey;
     const apiUrl = `https://www.googleapis.com/drive/v3/files?q=%27${folderId}%27+in+parents&fields=files(id%2Cname)&key=${apiKey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
@@ -25,8 +25,8 @@ async function loadDriveFiles(folderId) {
 loadDriveFiles(googleDriveFolderId);
 
 async function fetchGoogleSheetData(includeOldData) {
-    const apiKey = googleConfig.apiKey;
-    const sheetId = googleConfig.sheetId_data;
+    const apiKey = GoogleConfig.apiKey;
+    const sheetId = GoogleConfig.sheetId_data;
     const sheetName = includeOldData ? 'temp전체리그Data' : '전체리그Data';
     // const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!A1:Z1000?key=${apiKey}`;
     const url = includeOldData ? "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId + "/values/" + sheetName + "!A1:J40000?key=" + apiKey : "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId + "/values/" + sheetName + "!A1:J15000?key=" + apiKey;
@@ -68,8 +68,11 @@ async function fetchPlayerData() {
     if (playerData) {
         return playerData;
     }
-    const apiKey = googleConfig.apiKey;
-    const sheetId = googleConfig.sheetId_data;
+    const apiKey = GoogleConfig.apiKey;
+    const sheetId = GoogleConfig.sheetId_data;
+
+    console.log(apiKey)
+    console.log(sheetId)
     const sheetName = '선수Data'; // Replace with the name of the tab you want to fetch data from
     const url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId + "/values/" + sheetName + "!A1:G1000?key=" + apiKey;
     
@@ -136,8 +139,8 @@ async function getTeamRankingData() {
     const spinLoading = document.getElementById("loading-ranking");
     spinLoading.style.display = "block"; // show loading spinner
 
-    const apiKey = googleConfig.apiKey;
-    const sheetId = googleConfig.sheetId_data;
+    const apiKey = GoogleConfig.apiKey;
+    const sheetId = GoogleConfig.sheetId_data;
     const sheetName = 'STLS10일정'; // Replace with the name of the tab you want to fetch data from
     const url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId + "/values/" + sheetName + "!K3:R15?key=" + apiKey;
     
@@ -205,8 +208,10 @@ async function getScheduleData() {
     const spinLoading = document.getElementById("loading-schedule");
     spinLoading.style.display = "block"; // show loading spinner
 
-    const apiKey = googleConfig.apiKey;
-    const sheetId = googleConfig.sheetId_data;
+    await getDriveFiles(googleDriveFolderId);
+
+    const apiKey = GoogleConfig.apiKey;
+    const sheetId = GoogleConfig.sheetId_data;
     const sheetName = 'S10일정'; 
     
     const url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId + "/values/" + sheetName + "!A1:P107?key=" + apiKey;
@@ -994,6 +999,27 @@ function searchTwo() {
 document.getElementById('searchButton').addEventListener('click', search);
 document.getElementById('searchButton2').addEventListener('click', searchTwo);
 
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("searchButton").click();
+    }
+});
+
+document.getElementById("searchInput1").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("searchButton2").click();
+    }
+});
+
+document.getElementById("searchInput2").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("searchButton2").click();
+    }
+});
+
 
 // // Load all game results on page load
 // fetchGoogleSheetData().then(gameResults => {
@@ -1151,7 +1177,7 @@ if (storedValue) {
 
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(FirebaseConfig);
 const analytics = firebase.analytics(app);
 const database = firebase.database();
 
@@ -1199,4 +1225,4 @@ async function getGameImageFileId(stringFileName) {
     return file ? file.id : '';
 }
 
-
+export { fetchPlayerData, populatePlayerListTable };
