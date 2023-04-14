@@ -936,7 +936,7 @@ function populatePlayerListTable(playerResults) {
         row.insertCell().textContent = player.Point;
 
         const idCell = row.insertCell();
-        idCell.textContent = player.ID;
+        idCell.innerHTML = `${player.ID} ${player.RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : player.RankInTier === 2 ? '<i class="fas fa-crown" style="color: silver; text-shadow: 1px 1px 2px white;"></i>' : player.RankInTier === 3 ? '<i class="fas fa-crown" style="color: #cd7f32; text-shadow: 1px 1px 2px white; opacity: 0.4"></i>' : ''}`;
         idCell.style.cursor = "pointer";
         idCell.addEventListener("click", () => {
             displayPlayerStatsModal(player.ID.toLowerCase());
