@@ -575,13 +575,13 @@ function displayStatistics(gameResults, tableName, keyword, compare) {
                 <td colspan="2">
                     <div id="player-info" class="container text-center">
                     <h2 id="player-id">${playerThis[0].ID}</h2>
-                        <h4 id="player-race">Rank-${playerThis[0].Rank} / ELO ${playerThis[0].Point} / ${playerThis[0].Tier}-${playerThis[0].RankInTier} ${playerThis[0].RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : ''} / ${playerThis[0].Race}</h3>
+                        <h4 id="player-race">Rank-${playerThis[0].Rank} / ELO ${playerThis[0].Point} / ${playerThis[0].Tier}-${playerThis[0].RankInTier} ${playerThis[0].RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : playerThis[0].RankInTier === 2 ? '<i class="fas fa-crown" style="color: silver; text-shadow: 1px 1px 2px white;"></i>' : playerThis[0].RankInTier === 3 ? '<i class="fas fa-crown" style="color: #cd7f32; text-shadow: 1px 1px 2px white; opacity: 0.4"></i>' : ''} / ${playerThis[0].Race}</h4>
                     </div>                    
                     ${compare ? `
                     <div id="player-infovs" class="container text-center"> VS </div>
                     <div id="player-info2" class="container text-center grey-color">
                     <h2 id="player-id">${playerThat[0].ID}</h2>
-                        <h4 id="player-race2">Rank-${playerThat[0].Rank} / ELO ${playerThat[0].Point} / ${playerThat[0].Tier}-${playerThat[0].RankInTier} ${playerThat[0].RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : ''} / ${playerThat[0].Race}</h3>
+                        <h4 id="player-race2">Rank-${playerThat[0].Rank} / ELO ${playerThat[0].Point} / ${playerThat[0].Tier}-${playerThat[0].RankInTier} ${playerThat[0].RankInTier === 1 ? '<i class="fas fa-crown" style="color: gold; text-shadow: 1px 1px 2px white;"></i>' : playerThat[0].RankInTier === 2 ? '<i class="fas fa-crown" style="color: silver; text-shadow: 1px 1px 2px white;"></i>' : playerThat[0].RankInTier === 3 ? '<i class="fas fa-crown" style="color: #cd7f32; text-shadow: 1px 1px 2px white; opacity: 0.4"></i>' : ''} / ${playerThat[0].Race}</h4>
                     </div>
                     ` : ''}
                 </td>
