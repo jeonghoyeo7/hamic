@@ -20,6 +20,14 @@ async function fetchGoogleSheetData() {
 
     const rows = data.values;
     const gameResults = rows.slice(1).map((row) => {
+        const year = row[0];
+        const month = row[1];
+        const day = row[2];
+
+        const date = new Date(year, month - 1, day);
+        const formattedDate = `${year}.${month ? month.toString().padStart(2, '0') : ''}.${day ? day.toString().padStart(2, '0') : ''}`;
+
+
         return {
             year: row[0],
             month: row[1],
@@ -33,7 +41,7 @@ async function fetchGoogleSheetData() {
             WinnerRace: row[11],
             LoserTier: row[13],            
             LoserRace: row[14],
-            Date: row[19],
+            Date: formattedDate,
         };
     }).filter(result => {
         return result.leagueTitle && result.WinnerID && result.LoserID &&
@@ -252,7 +260,7 @@ function displayData(gameResults, tableName, itemsPerPage = 100, currentPage = 1
   
 
 
-function displayStatistics(gameResults, tableName, keyword, compare) {  
+async function displayStatistics(gameResults, tableName, keyword, compare) {  
     keyword = keyword.toString();  
     const playerThis = playerInfoGlobal.filter(
         (result) =>
@@ -569,9 +577,23 @@ function displayStatistics(gameResults, tableName, keyword, compare) {
     
     const statsTable = document.getElementById(tableName);
     if (statsTable !== null) {
+        // Check if profile picture exists
+        const allowedExtensions = ['.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG'];
+        let profilePictureSrc = false;
+        let hasProfilePicture = false;
+
+        // Check if the file with allowed extensions exists
+        for (const extension of allowedExtensions) {
+            profilePictureSrc = `./img/${playerThis[0].ID.toUpperCase()}${extension}`;
+            hasProfilePicture = await imageExists(profilePictureSrc);
+            if (hasProfilePicture) {
+                break;
+            }
+        }
+        
         statsTable.innerHTML = `
-        <tbody>
-            <tr>
+        <tbody>            
+            <tr${hasProfilePicture ? ` style="background-image: url(${profilePictureSrc}); min-height: 300px; background-position: center; background-size: contain; background-repeat: no-repeat;"` : ''}>
                 <td colspan="2">
                     <div id="player-info" class="container text-center">
                     <h2 id="player-id">${playerThis[0].ID}</h2>
@@ -585,7 +607,7 @@ function displayStatistics(gameResults, tableName, keyword, compare) {
                     </div>
                     ` : ''}
                 </td>
-            </tr>
+            </tr>         
             <tr>
                 <td>
                     <div class="table-container">
@@ -1245,3 +1267,29 @@ function displayPaginationButtons(totalItems, pageContainerName, itemsPerPage, c
 }
 
 export { fetchPlayerData, populatePlayerListTable };
+
+// Function to check if an image file exists
+function imageExists(imageUrl) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = imageUrl;
+    });
+}
+
+// Get all the menu items
+const menuItems = document.querySelectorAll('.nav-link');
+
+// Add a click event listener to each menu item
+menuItems.forEach(item => {
+  item.addEventListener('click', function() {
+    // Remove the "active" class from all the menu items
+    menuItems.forEach(item => {
+      item.classList.remove('active');
+    });
+
+    // Add the "active" class to the clicked menu item
+    this.classList.add('active');
+  });
+});

@@ -392,3 +392,54 @@ footer i {
 #schedule-table .grey-background {
     background-color: rgb(223, 220, 220);
 }
+
+.dropdown-toggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: #fff; /* Brighter color */
+}
+
+/* Light blue color for the winning team */
+#schedule-table .team-win {
+    background-color: #e5f2ff;
+}
+
+/* Light red color for the losing team */
+#schedule-table .team-loss {
+    background-color: #ffe5e5;
+}
+
+.win-rate {
+    font-size: smaller;
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img.trophy {
+    width: 80px;
+    height: 80px;
+}
+
+img.medal {
+    width: 80px;
+    height: 80px;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 9999;
+    background-color: #000;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 16px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+  
