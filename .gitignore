@@ -3,8 +3,11 @@ node_modules/
 
 # Ignore .env file
 .env
+hamic_elo/hamicelo_oauth.json
+hamic_elo/.clasp.json
 
 # Ignore config.js in each folder
 **/config.js
 **/hamicgamedata_key.json
 */config/*
+

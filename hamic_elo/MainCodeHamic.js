@@ -54,9 +54,6 @@ divideRefPoint_CEL2_CEL3 = setParam[7][7];
 refPoint = setParam[10][1];
 refPointAbsent = setParam[11][1];
 
-// Logger.log(upPointTier_HEL1)
-// Logger.log(downPointTier_MEL);
-
 weight_STL = setParam[13][1];
 weight_SILHST = setParam[14][1];
 weight_EventTeam = setParam[15][1];
@@ -79,8 +76,8 @@ time_weight_first = (setParam[38][1] * 13) / 14;
 const first_time = new Date("2021.03.01").getTime();
 const last_time = new Date("2023.05.01").getTime();
 
-// Logger.log(weight_Clan)
-// Logger.log(weight_STL)
+docParam_Lrange = docParam.getRange(57, 4, 20, 4);
+var leagueList = docParam_Lrange.getValues();
 
 function calculateELO() {
   // 주종 입력
@@ -262,11 +259,11 @@ function calculateELO() {
     }
     // ELO 점수 업데이트
     gameRefPoint = refPointChecker(gameSet);
-    leaguDecision = weightLeague(league);
-    gameLeagueWeight = leaguDecision[0];
-    gameLeage = leaguDecision[1];
+    leagueDecision = weightLeague(league);
+    gameLeagueWeight = leagueDecision[0];
+    gameLeague = leagueDecision[1];
     gameTierWeight = weightTier(winnerTier, loserTier);
-    gameSetWeight = weightSet(gameSet, gameLeage);
+    gameSetWeight = weightSet(gameSet, gameLeague);
     newELO = updateELO(
       PlayersElo.get(winner),
       PlayersElo.get(loser),
@@ -584,36 +581,44 @@ function tierChangeChecker(playerTier, ELO) {
 }
 
 function weightLeague(league) {
-  if (
-    league.includes("프로리그") ||
-    league.includes("클랜친선경기") ||
-    league.includes("KPL") ||
-    league.includes("WPL") ||
-    league.includes("3050 프로리그") ||
-    league.includes("사일배 클랜리그") ||
-    league.includes("TPL") ||
-    league.includes("WE CLAN LEAGUE") ||
-    league.includes("AHCL") ||
-    league.includes("&클랜 ESL") ||
-    league.includes("WHITE 클랜팀리그")
-  )
-    return [weight_ClanTeam, "team"]; // 클랜 팀리그
-  else if (
-    league.includes("KALEAGUE") ||
-    league.includes("하믹 청정수리그 S3") ||
-    league.includes("청정수팀리그") ||
-    league.includes("홍토스배 친선하믹클랜전")
-  )
-    return [weight_EventTeam, "team"]; // 하믹 이벤트 팀리그
-  else if (
-    league.includes("청정수리그") ||
-    league.includes("포워드배 오픈컵") ||
-    league.includes("하믹 연승전") ||
-    league.includes("홍토스배 CEL2 야간종족최강전") ||
-    league.includes("사일배 당일치기 토너먼트") ||
-    league.includes("끝장전")
-  )
-    return [weight_EventIndi, "indi"]; // 이벤트 개인리그
+  leagueInfo = findLeagueInfo(league);
+  if (leagueInfo != null) {
+    leagueType = leagueInfo.type;
+    if (leagueType.includes("팀리그")) {
+      return [leagueInfo.weight, "team"];
+    }
+    return [leagueInfo.weight, "indi"];
+  }
+  // if (
+  //   leagueInfo != league.includes("프로리그") ||
+  //   league.includes("클랜친선경기") ||
+  //   league.includes("KPL") ||
+  //   league.includes("WPL") ||
+  //   league.includes("3050 프로리그") ||
+  //   league.includes("사일배 클랜리그") ||
+  //   league.includes("TPL") ||
+  //   league.includes("WE CLAN LEAGUE") ||
+  //   league.includes("AHCL") ||
+  //   league.includes("&클랜 ESL") ||
+  //   league.includes("WHITE 클랜팀리그")
+  // )
+  //   return [weight_ClanTeam, "team"]; // 클랜 팀리그
+  // else if (
+  //   league.includes("KALEAGUE") ||
+  //   league.includes("하믹 청정수리그 S3") ||
+  //   league.includes("청정수팀리그") ||
+  //   league.includes("홍토스배 친선하믹클랜전")
+  // )
+  //   return [weight_EventTeam, "team"]; // 하믹 이벤트 팀리그
+  // else if (
+  //   league.includes("청정수리그") ||
+  //   league.includes("포워드배 오픈컵") ||
+  //   league.includes("하믹 연승전") ||
+  //   league.includes("홍토스배 CEL2 야간종족최강전") ||
+  //   league.includes("사일배 당일치기 토너먼트") ||
+  //   league.includes("끝장전")
+  // )
+  //   return [weight_EventIndi, "indi"]; // 이벤트 개인리그
   else if (
     league.includes("team") ||
     league.includes("Team") ||
@@ -774,4 +779,29 @@ function updateELO(
 function prob(r1, r2) {
   const K = 400;
   return (1.0 * 1.0) / (1 + 1.0 * Math.pow(10, (1.0 * (r1 - r2)) / K));
+}
+
+function findLeagueInfo(leagueName) {
+  var leagueInfo = {};
+
+  for (var col = 0; col < leagueList[0].length; col++) {
+    for (var row = 2; row < leagueList.length - 1; row++) {
+      if (!leagueList[row][col] || leagueList[row][col].trim() === "") {
+        continue;
+      }
+
+      // Compare names (ignoring case for English names)
+      var leagueNameToCompare = leagueName.toLowerCase().replace(/\r?\n|\r/g, "");
+      var leagueListNameToCompare = leagueList[row][col].toLowerCase().replace(/\r?\n|\r/g, "");
+
+      if (leagueNameToCompare.includes(leagueListNameToCompare) || leagueNameToCompare === leagueListNameToCompare) {
+        var weight = leagueList[0][col]; // Weight is in the first row of the column
+        var type = leagueList[1][col]; // Type is in the second row of the column
+        leagueInfo = { type: type, weight: weight };
+        return leagueInfo;
+      }
+    }
+  }
+
+  return null;
 }

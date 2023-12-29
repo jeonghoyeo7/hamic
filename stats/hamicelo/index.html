@@ -1,440 +1,796 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Starcraft HAMIC Player Data</title>
-    <meta property="og:description" content="Starcraft HAMIC Data Page"/>
-    <meta property="og:image" content="./img/hamicThum.jpeg"/>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
+    <meta property="og:description" content="Starcraft HAMIC Data Page" />
+    <meta property="og:image" content="./img/hamicThum.jpeg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3782448334887483"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <script type="module" src="script.js"></script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Starcraft HAMIC</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="stlS10">STL S10</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="stlS10Team">S10팀전적</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="hamicPlayer">하믹 등록 선수</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="gameDataLink">전적검색</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="gameDataTwoPlayers">상대전적</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="reportMissingDataLink">누락데이터 리포트</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="reportSuggestionLink">사이트건의사항</a>
-                    </li>
-                </ul>
-            </div>
+      <div class="container">
+        <a class="navbar-brand" href="#">Starcraft HAMIC</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="stlS11">STL S11</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="stlS11Team">S11팀전적</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="hamicPlayer">하믹 등록 선수</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="gameDataLink">전적검색</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="gameDataTwoPlayers">상대전적</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="statistics">통계</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="reportMissingDataLink"
+                >누락데이터 리포트</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="reportSuggestionLink"
+                >사이트건의사항</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="totoEstimation">.</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
-    <div id="gameDataSection" style="display: none;">
-        <div class="container">            
-            <div class="row justify-content-center align-items-center mt-4">
-                <div class="col-sm-8 col-md-6 col-lg-4">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search by player ID...">
-                        <button id="searchButton" type="button" class="btn btn-danger">
-                            <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                            <span id="buttonText">검색</span>
-                        </button>
-                    </div>
-                    <div class="form-check mt-2 ml-1">
-                        <input class="form-check-input" type="checkbox" value="" id="includeDataCheckbox">
-                        <label class="form-check-label" for="includeDataCheckbox">
-                            2021.3.1 이전 데이터도 포함하기
-                        </label>
-                    </div>
-                </div>
+    <div id="gameDataSection" style="display: none">
+      <div class="container">
+        <div class="row justify-content-center align-items-center mt-4">
+          <div class="col-sm-8 col-md-6 col-lg-4">
+            <div class="input-group">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Search by player ID..."
+              />
+              <button id="searchButton" type="button" class="btn btn-danger">
+                <span
+                  id="buttonSpinner"
+                  class="spinner-border spinner-border-sm d-none"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span id="buttonText">검색</span>
+              </button>
             </div>
-    
-            <div class="mt-4">
-                <table id="statsTable" class="table table-striped table-hover table-sm table-responsive"></table>
-            </div>
-    
-            <div class="mt-4">
-                <table id="rankingTable" class="table table-striped table-hover table-sm game-data-table"> 
-                    <thead class="table-light">
-                        <tr>							
-                            <th>날짜</th>
-                            <th>승리선수 티어</th>
-                            <th>승리선수 ID</th>
-                            <th>승리선수 종족</th>
-                            <th>패배선수 티어</th>
-                            <th>패배선수 ID</th>
-                            <th>패배선수 종족</th>
-                            <th>맵</th>
-                            <th>리그</th>
-                            <th>리그 세부</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rankingTableBody">
-                        <!-- Data will be populated here -->
-                    </tbody>
-                </table>  
-            </div>
+            <!-- <div class="form-check mt-2 ml-1">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="includeDataCheckbox"
+              />
+              <label class="form-check-label" for="includeDataCheckbox">
+                2021.3.1 이전 데이터도 포함하기
+              </label>
+            </div> -->
+          </div>
         </div>
-    </div>
-    
 
-    <div id="stlS10Section" style="display: none;">
-        <div class="container">
+        <div class="mt-4">
+          <table
+            id="statsTable"
+            class="table table-striped table-hover table-sm table-responsive"
+          ></table>
+        </div>
+
+        <div class="mt-4">
+          <div class="container">
             <div class="row">
-                <div class="mt-4">
-                    <div id="today-match"></div>
+              <!-- Dropdown for Year Selection -->
+              <div class="col">
+                <div class="dropdown">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="yearDropdownButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Select Year
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="yearDropdownButton"
+                  >
+                    <a class="dropdown-item" href="#">All</a>
+                    <!-- Add other years here -->
+                    <a class="dropdown-item" href="#">2024</a>
+                    <a class="dropdown-item" href="#">2023</a>
+                    <a class="dropdown-item" href="#">2022</a>
+                    <a class="dropdown-item" href="#">2021</a>
+                    <a class="dropdown-item" href="#">2020</a>
+                    <a class="dropdown-item" href="#">2019</a>
+                    <a class="dropdown-item" href="#">2018</a>
+                    <!-- ... -->
+                  </div>
                 </div>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-                <div class="mt-4">
-                    <h3>Team Ranking</h3>
-                    <div id="loading-ranking" class="text-center" style="display: none;">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                    <div id="team-ranking"></div>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-                <div class="mt-4">
-                    <h3>Schedule</h3>
-                    <div id="loading-schedule" class="text-center" style="display: none;">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                    <div id="schedule" class="table-container"></div>
-                </div>
-            </div>
-        </div>
-    </div>   
+              </div>
 
-    <div id="stlS10TeamSection" style="display: none;">
-        <div class="container text-center">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="team-select-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Team
-            </button>
-            <div class="dropdown-menu" aria-labelledby="team-select-button">
-              <a class="dropdown-item" href="#" data-value="AT">AT</a>
-              <a class="dropdown-item" href="#" data-value="KaL">KaL</a>
-              <a class="dropdown-item" href="#" data-value="MOM">MOM</a>
-              <a class="dropdown-item" href="#" data-value="HBS">HBS</a>
-              <a class="dropdown-item" href="#" data-value="STB">STB</a>
-              <a class="dropdown-item" href="#" data-value="NF">NF</a>
-              <a class="dropdown-item" href="#" data-value="PGS">PGS</a>
-              <a class="dropdown-item" href="#" data-value="F1">F1</a>
-              <a class="dropdown-item" href="#" data-value="IDB">IDB</a>
-              <a class="dropdown-item" href="#" data-value="ITS">ITS</a>
+              <!-- Buttons for Sorting, aligned to the right -->
+              <div class="col text-right">
+                <button
+                  id="sortDescButton"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  최신순
+                </button>
+                <button
+                  id="sortAscButton"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  과거순
+                </button>
+              </div>
             </div>
           </div>
-      
-          <div id="loading-team-schedule" class="text-center" style="display: none;">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+
+          <table
+            id="rankingTable"
+            class="table table-striped table-hover table-sm game-data-table"
+          >
+            <thead class="table-light">
+              <tr>
+                <th>날짜</th>
+                <th>승리선수 티어</th>
+                <th>승리선수 ID</th>
+                <th>승리선수 종족</th>
+                <th>패배선수 티어</th>
+                <th>패배선수 ID</th>
+                <th>패배선수 종족</th>
+                <th>맵</th>
+                <th>리그</th>
+                <th>리그 세부</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody">
+              <!-- Data will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="stlS11Section" style="display: none">
+      <div class="container">
+        <div class="row">
+          <div class="mt-4">
+            <div id="today-match"></div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="mt-4">
+            <h3>Team Ranking</h3>
+            <div id="loading-ranking" class="text-center" style="display: none">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div id="team-ranking"></div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="mt-4">
+            <h3>Schedule</h3>
+            <div
+              id="loading-schedule"
+              class="text-center"
+              style="display: none"
+            >
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div id="schedule" class="table-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="stlS11TeamSection" style="display: none">
+      <div class="container text-center">
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="team-select-button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Select Team
+          </button>
+          <div class="dropdown-menu" aria-labelledby="team-select-button">
+            <a class="dropdown-item" href="#" data-value="AT">AT</a>
+            <a class="dropdown-item" href="#" data-value="KaL">KaL</a>
+            <a class="dropdown-item" href="#" data-value="MOM">MOM</a>
+            <a class="dropdown-item" href="#" data-value="HBS">HBS</a>
+            <a class="dropdown-item" href="#" data-value="STB">STB</a>
+            <a class="dropdown-item" href="#" data-value="NF">NF</a>
+            <a class="dropdown-item" href="#" data-value="PGS">PGS</a>
+            <a class="dropdown-item" href="#" data-value="F1">F1</a>
+            <a class="dropdown-item" href="#" data-value="IDB">IDB</a>
+            <a class="dropdown-item" href="#" data-value="ITS">ITS</a>
+          </div>
+        </div>
+
+        <div
+          id="loading-team-schedule"
+          class="text-center"
+          style="display: none"
+        >
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <div id="team_schedule" class="table-container"></div>
+      </div>
+    </div>
+
+    <div id="statSection" style="display: none">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <canvas id="teamChart"></canvas>
+          </div>
+          <div class="col-md-4">
+            <canvas id="tierChart"></canvas>
+          </div>
+          <div class="col-md-4">
+            <canvas id="raceChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="reportMissingDataSection"
+      style="display: none; text-align: center"
+    >
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfRuwrlf9dtdjl0Hi2JpY84QWdKAFFgBEOB3YD-EtdLdkNgzQ/viewform?embedded=true"
+        width="100%"
+        height="2079"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        >Loading…</iframe
+      >
+    </div>
+
+    <div id="reportSuggestionSection" style="display: none; text-align: center">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeyh1sWzxVQwcWohUVLcx4HLRlKdzsGWLbe8VHAomvm4ISKkw/viewform?embedded=true"
+        width="100%"
+        height="802"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        >Loading…</iframe
+      >
+    </div>
+
+    <div id="gameDataSectionTwoPlayer" style="display: none">
+      <div class="container" style="margin-top: 20px">
+        <form>
+          <div class="row justify-content-center align-items-center">
+            <div class="col-sm-4">
+              <input
+                type="text"
+                class="form-control"
+                id="searchInput1"
+                placeholder="기준 선수의 ID"
+              />
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                class="form-control"
+                id="searchInput2"
+                placeholder="상대 선수의 ID"
+              />
+            </div>
+            <div class="col-sm-2">
+              <button
+                id="searchButton2"
+                type="button"
+                class="btn btn-danger btn-block"
+              >
+                <span
+                  id="buttonSpinner2"
+                  class="spinner-border spinner-border-sm d-none"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span id="buttonText2">검색</span>
+              </button>
             </div>
           </div>
-      
-          <div id="team_schedule" class="table-container"></div>
+        </form>
+        <!-- <div class="custom-flex-center">
+          <div id="check2" class="form-check mt-2 ml-1 custom-form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="includeDataCheckbox2"
+            />
+            <label class="form-check-label" for="includeDataCheckbox2">
+              2021.3.1 이전 데이터도 포함하기
+            </label>
+          </div>
+        </div> -->
+
+        <div class="mt-4">
+          <table
+            id="statsTable2"
+            class="table table-striped table-hover table-sm"
+          ></table>
         </div>
+
+        <div class="mt-4">
+          <table
+            id="rankingTable2"
+            class="table table-striped table-hover table-sm game-data-table"
+          >
+            <thead class="table-light">
+              <tr>
+                <th>날짜</th>
+                <th>승리선수 티어</th>
+                <th>승리선수 ID</th>
+                <th>승리선수 종족</th>
+                <th>패배선수 티어</th>
+                <th>패배선수 ID</th>
+                <th>패배선수 종족</th>
+                <th>맵</th>
+                <th>리그</th>
+                <th>리그 세부</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody2">
+              <!-- Data will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <div id="reportMissingDataSection" style="display: none; text-align: center;">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfRuwrlf9dtdjl0Hi2JpY84QWdKAFFgBEOB3YD-EtdLdkNgzQ/viewform?embedded=true" width="100%" height="2079" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    </div>
-
-
-    <div id="reportSuggestionSection" style="display: none; text-align: center;">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeyh1sWzxVQwcWohUVLcx4HLRlKdzsGWLbe8VHAomvm4ISKkw/viewform?embedded=true" width="100%" height="802" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    </div>
-
-    <div id="gameDataSectionTwoPlayer" style="display: none;">
-        <div class="container" style="margin-top: 20px;">
-            <form>
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="searchInput1" placeholder="기준 선수의 ID">
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="searchInput2" placeholder="상대 선수의 ID">
-                    </div>
-                    <div class="col-sm-2">
-                        <button id="searchButton2" type="button" class="btn btn-danger btn-block">
-                            <span id="buttonSpinner2" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                            <span id="buttonText2">검색</span>
-                        </button>
-                    </div>                    
-                </div>
-                
-            </form>
-            <div class="custom-flex-center">
-                <div id="check2" class="form-check mt-2 ml-1 custom-form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="includeDataCheckbox2">
-                    <label class="form-check-label" for="includeDataCheckbox2">
-                        2021.3.1 이전 데이터도 포함하기
-                    </label>
-                </div>
+    <div id="playerListSection" style="display: none">
+      <div class="container">
+        <form>
+          <div class="row justify-content-center align-items-center mt-4">
+            <div class="col-sm-8 col-md-6 col-lg-4">
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="playerSearchInput"
+                  class="form-control"
+                  placeholder="Search by player info..."
+                />
+                <button
+                  id="playerSearchButton"
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  <span
+                    id="playerButtonSpinner"
+                    class="spinner-border spinner-border-sm d-none"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span id="playerButtonText">입력해서 검색</span>
+                </button>
+              </div>
             </div>
-
-            <div class="mt-4" >
-                <table id="statsTable2" class="table table-striped table-hover table-sm"></table>
-            </div>
-
-            <div class="mt-4" >
-                <table id="rankingTable2" class="table table-striped table-hover table-sm game-data-table">
-                    <thead class="table-light">
-                        <tr>
-                            <th>날짜</th>
-                            <th>승리선수 티어</th>
-                            <th>승리선수 ID</th>
-                            <th>승리선수 종족</th>
-                            <th>패배선수 티어</th>
-                            <th>패배선수 ID</th>
-                            <th>패배선수 종족</th>
-                            <th>맵</th>
-                            <th>리그</th>
-                            <th>리그 세부</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rankingTableBody2">
-                        <!-- Data will be populated here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>                
-    </div>
-    
-    <div id="playerListSection" style="display: none;">
-        <div class="container">
-            <form>
-                <div class="row justify-content-center align-items-center mt-4">
-                    <div class="col-sm-8 col-md-6 col-lg-4">
-                        <div class="input-group">
-                            <input type="text" id="playerSearchInput" class="form-control" placeholder="Search by player info...">
-                            <button id="playerSearchButton" type="button" class="btn btn-danger">
-                                <span id="playerButtonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                                <span id="playerButtonText">입력해서 검색</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>                
-            </form>
-            <div class="row">
-                <div class="col-md-4">
-                    <canvas id="teamChart"></canvas>
-                </div>
-                <div class="col-md-4">
-                    <canvas id="tierChart"></canvas>
-                </div>
-                <div class="col-md-4">
-                    <canvas id="raceChart"></canvas>
-                </div>
-            </div>                  
-            <div class="mt-4 player-list-table">
-                <table id="playerListTable" class="table table-striped table-hover table-sm table-responsive-md">
-                    <thead class="table-light">
-                        <tr>
-                            <th data-sort-key="Team">팀</th>
-                            <th data-sort-key="Tier">티어</th>
-                            <th data-sort-key="ID">선수 ID</th>
-                            <th data-sort-key="Race">종족</th>
-                            <!-- <th data-sort-key="LastTierChanged">티어 변경일</th>
+          </div>
+        </form>
+        <div class="mt-4 player-list-table">
+          <table
+            id="playerListTable"
+            class="table table-striped table-hover table-sm table-responsive-md"
+          >
+            <thead class="table-light">
+              <tr>
+                <th data-sort-key="Team">팀</th>
+                <th data-sort-key="Tier">티어</th>
+                <th data-sort-key="ID">선수 ID</th>
+                <th data-sort-key="Race">종족</th>
+                <th data-sort-key="NumSTL">STL출전</th>
+                <th data-sort-key="NumSTLWin">STL승</th>
+                <th data-sort-key="NumSTLLose">STL패</th>
+                <th data-sort-key="NumSILWin">SIL/HST승</th>
+                <th data-sort-key="NumSILLose">SIL/HST패</th>
+                <th data-sort-key="NumTotalWin">총 승리</th>
+                <th data-sort-key="NumTotalLose">총 패배</th>
+                <!-- <th data-sort-key="LastTierChanged">티어 변경일</th>
                             <th data-sort-key="ELO">ELO</th>
                             <th data-sort-key="TierChangedByELO">ELO에 의한 티어 변경</th> -->
-                        </tr>
-                    </thead>
-                    <tbody id="playerListTableBody">
-                        <!-- Data will be populated here -->
-                    </tbody>
-                </table>
-            </div>
+              </tr>
+            </thead>
+            <tbody id="playerListTableBody">
+              <!-- Data will be populated here -->
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-    
-    
+
+    <div id="totoSection" style="display: none; text-align: center">
+      <div id="matchup">
+        <h2>Today's Matchup</h2>
+        <p>Player 1 vs. Player 2</p>
+      </div>
+
+      <div id="voting-section">
+        <h2>Vote for the Winner</h2>
+        <form id="vote-form">
+          <input type="radio" name="winner" value="player1" /> Player 1<br />
+          <input type="radio" name="winner" value="player2" /> Player 2<br /><br />
+          <input type="submit" value="Submit Vote" />
+        </form>
+      </div>
+
+      <div id="voting-results">
+        <h2>Voting Results</h2>
+        <p>Player 1: <span id="player1-votes">0</span></p>
+        <p>Player 2: <span id="player2-votes">0</span></p>
+      </div>
+
+      <div id="game-result">
+        <h2>Game Result</h2>
+        <form id="result-form">
+          <label for="game-result-input">Enter the Result:</label>
+          <input type="text" id="game-result-input" name="game-result" />
+          <input type="submit" value="Submit Result" />
+        </form>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
 
-
     <script type="module">
-        import { fetchPlayerData, populatePlayerListTable } from './script.js';
-        document.getElementById("stlS10").addEventListener("click", function() {
-            document.getElementById("gameDataSection").style.display = "none";
-            document.getElementById("reportMissingDataSection").style.display = "none";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "none";
-            document.getElementById("playerListSection").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "none";
-            document.getElementById("stlS10Section").style.display = "block";
-            document.getElementById("stlS10TeamSection").style.display = "none";
+      import { fetchPlayerData, populatePlayerListTable } from "./script.js";
+      document.getElementById("stlS11").addEventListener("click", function () {
+        document.getElementById("gameDataSection").style.display = "none";
+        document.getElementById("reportMissingDataSection").style.display =
+          "none";
+        document.getElementById("gameDataSectionTwoPlayer").style.display =
+          "none";
+        document.getElementById("playerListSection").style.display = "none";
+        document.getElementById("reportSuggestionSection").style.display =
+          "none";
+        document.getElementById("stlS11Section").style.display = "block";
+        document.getElementById("stlS11TeamSection").style.display = "none";
+        document.getElementById("statSection").style.display = "none";
+        document.getElementById("totoSection").style.display = "none";
+      });
+
+      document
+        .getElementById("stlS11Team")
+        .addEventListener("click", function () {
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "block";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.getElementById("stlS10Team").addEventListener("click", function() {
-            document.getElementById("gameDataSection").style.display = "none";
-            document.getElementById("reportMissingDataSection").style.display = "none";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "none";
-            document.getElementById("playerListSection").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "none";
-            document.getElementById("stlS10Section").style.display = "none";
-            document.getElementById("stlS10TeamSection").style.display = "block";
+      document
+        .getElementById("gameDataLink")
+        .addEventListener("click", function () {
+          document.getElementById("gameDataSection").style.display = "block";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.getElementById("gameDataLink").addEventListener("click", function() {
-            document.getElementById("gameDataSection").style.display = "block";
-            document.getElementById("reportMissingDataSection").style.display = "none";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "none";
-            document.getElementById("playerListSection").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "none";
-            document.getElementById("stlS10Section").style.display = "none";
-            document.getElementById("stlS10TeamSection").style.display = "none";
+      document
+        .getElementById("reportMissingDataLink")
+        .addEventListener("click", function () {
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "block";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.getElementById("reportMissingDataLink").addEventListener("click", function() {
-            document.getElementById("gameDataSection").style.display = "none";
-            document.getElementById("reportMissingDataSection").style.display = "block";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "none";
-            document.getElementById("playerListSection").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "none";
-            document.getElementById("stlS10Section").style.display = "none";
-            document.getElementById("stlS10TeamSection").style.display = "none";
+      document
+        .getElementById("reportSuggestionLink")
+        .addEventListener("click", function () {
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "block";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.getElementById("reportSuggestionLink").addEventListener("click", function() {
-            document.getElementById("gameDataSection").style.display = "none";
-            document.getElementById("reportMissingDataSection").style.display = "none";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "none";
-            document.getElementById("playerListSection").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "block";
-            document.getElementById("stlS10Section").style.display = "none";
-            document.getElementById("stlS10TeamSection").style.display = "none";
+      document
+        .getElementById("gameDataTwoPlayers")
+        .addEventListener("click", function () {
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "block";
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.getElementById("gameDataTwoPlayers").addEventListener("click", function() {
-            document.getElementById("gameDataSection").style.display = "none";
-            document.getElementById("reportMissingDataSection").style.display = "none";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "block";
-            document.getElementById("playerListSection").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "none";
-            document.getElementById("stlS10Section").style.display = "none";
-            document.getElementById("stlS10TeamSection").style.display = "none";
+      document
+        .getElementById("statistics")
+        .addEventListener("click", function () {
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "block";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.getElementById("hamicPlayer").addEventListener("click", async function () {
-            const playerResults = await fetchPlayerData();
-            populatePlayerListTable(playerResults);
-            document.getElementById("playerListSection").style.display = "block";
-            document.getElementById("gameDataSection").style.display = "none";
-            document.getElementById("reportMissingDataSection").style.display = "none";
-            document.getElementById("gameDataSectionTwoPlayer").style.display = "none";
-            document.getElementById("reportSuggestionSection").style.display = "none";
-            document.getElementById("stlS10Section").style.display = "none";
-            document.getElementById("stlS10TeamSection").style.display = "none";
+      document
+        .getElementById("hamicPlayer")
+        .addEventListener("click", async function () {
+          const playerResults = await fetchPlayerData();
+          populatePlayerListTable(playerResults);
+          document.getElementById("playerListSection").style.display = "block";
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "none";
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchPlayerData();
+      document
+        .getElementById("totoEstimation")
+        .addEventListener("click", async function () {
+          const playerResults = await fetchPlayerData();
+          populatePlayerListTable(playerResults);
+          document.getElementById("playerListSection").style.display = "none";
+          document.getElementById("gameDataSection").style.display = "none";
+          document.getElementById("reportMissingDataSection").style.display =
+            "none";
+          document.getElementById("gameDataSectionTwoPlayer").style.display =
+            "none";
+          document.getElementById("reportSuggestionSection").style.display =
+            "none";
+          document.getElementById("stlS11Section").style.display = "none";
+          document.getElementById("stlS11TeamSection").style.display = "none";
+          document.getElementById("statSection").style.display = "none";
+          document.getElementById("totoSection").style.display = "block";
         });
-        // Set the initial state
-        document.getElementById("stlS10").click();
+
+      document.addEventListener("DOMContentLoaded", function () {
+        fetchPlayerData();
+      });
+      // Set the initial state
+      document.getElementById("stlS11").click();
     </script>
 
     <!-- Footer -->
     <footer class="footer mt-auto py-3 bg-light">
-        <div class="container p-3 d-flex flex-wrap justify-content-between align-items-center">
-            <div class="mb-0">&copy; 2023 Starcraft HAMIC. All rights reserved.</div>
-            <div class="mb-0">Created by 100su</div>
-            <div class="buymeacoffee-container">
-                <a href="https://www.buymeacoffee.com/100su">
-                    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=100su&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
-                </a>
-            </div>
-            <p class="mb-0">
-                <span class="visitor-stats">
-                    Total visitors: <span id="totalVisitors">0</span>
-                </span>
-                |
-                <span class="visitor-stats">
-                    Today's visitors: <span id="todayVisitors">0</span>
-                </span>
-            </p>
+      <div
+        class="container p-3 d-flex flex-wrap justify-content-between align-items-center"
+      >
+        <div class="mb-0">
+          &copy; 2023 Starcraft HAMIC. All rights reserved.
         </div>
+        <div class="mb-0">Created by 100su</div>
+        <div class="buymeacoffee-container">
+          <a href="https://www.buymeacoffee.com/100su">
+            <img
+              src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=100su&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+            />
+          </a>
+        </div>
+        <p class="mb-0">
+          <span class="visitor-stats">
+            Total visitors: <span id="totalVisitors">0</span>
+          </span>
+          |
+          <span class="visitor-stats">
+            Today's visitors: <span id="todayVisitors">0</span>
+          </span>
+        </p>
+      </div>
     </footer>
-        
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    
-    
-    <div class="modal fade" id="playerStatsModal" tabindex="-1" aria-labelledby="playerStatsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="playerStatsModalLabel">Player Stats</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center align-items-center">
-                    <div>
-                        <table id="statsTableModal" class="table table-striped table-hover table-sm table-responsive"></table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <div
+      class="modal fade"
+      id="playerStatsModal"
+      tabindex="-1"
+      aria-labelledby="playerStatsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="playerStatsModalLabel">Player Stats</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body d-flex justify-content-center align-items-center"
+          >
+            <div>
+              <table
+                id="statsTableModal"
+                class="table table-striped table-hover table-sm table-responsive"
+              ></table>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Game Image Modal -->
-    <div class="modal fade" id="gameImageModal" tabindex="-1" aria-labelledby="gameImageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="gameImageModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center align-items-center">
-                    <div class="loading" style="display: none;">
-                        <div class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                    <div>
-                        <img id="gameImage" class="img-fluid" src="" alt="Game Image">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+    <div
+      class="modal fade"
+      id="gameImageModal"
+      tabindex="-1"
+      aria-labelledby="gameImageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="gameImageModalLabel"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body d-flex justify-content-center align-items-center"
+          >
+            <div class="loading" style="display: none">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
             </div>
+            <div>
+              <img id="gameImage" class="img-fluid" src="" alt="Game Image" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-
-    
-
-    </body>
+  </body>
 </html>
